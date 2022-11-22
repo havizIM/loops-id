@@ -50,6 +50,24 @@
                 </div>
 
                 <div class="mt-6">
+                    <label for="gender" class="block text-sm font-medium text-gray-700 leading-5">
+                        Gender
+                    </label>
+
+                    <div class="mt-1 rounded-md shadow-sm">
+                        <select wire:model.lazy="gender" id="gender" type="gender" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('email') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red @enderror">
+                            <option value=""></option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    @error('gender')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mt-6">
                     <label for="password" class="block text-sm font-medium text-gray-700 leading-5">
                         Password
                     </label>
