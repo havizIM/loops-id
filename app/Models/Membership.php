@@ -15,4 +15,8 @@ class Membership extends Model
         'price',
         'is_active'
     ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
 }
