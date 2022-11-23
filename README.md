@@ -20,3 +20,7 @@
 
 Jalankan aplikasi dengan command : npm run dev
 Copy link yang tersedia pada terminal di browser
+
+## Untuk Unit Test Dengan Dusk
+
+Jalankan command : php artisan dusk
