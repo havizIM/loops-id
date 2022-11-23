@@ -11,7 +11,8 @@
 3. Copy file .env.example menjadi .env
 4. Jalankan command : php artisan key:generate
 5. Jalankan command : php artisan migrate --seed
-6. Jalankan command : npm install
+6. Jalankan command : php artisan optimize:clear
+7. Jalankan command : npm install
 
 ## Cara Running Aplikasi
 
