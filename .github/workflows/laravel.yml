@@ -42,4 +42,8 @@ jobs:
         node-version: 18
         cache: 'npm'
     - run: npm install
+    
+    - name: Laravel Dusk Testing
+      run: |
+        php artisan dusk
 
