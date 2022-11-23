@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\EmailVerificationController;
-use App\Http\Controllers\Auth\LogoutController;
+use App\Models\Membership;
 use App\Http\Livewire\Auth\Login;
-use App\Http\Livewire\Auth\Passwords\Confirm;
+use App\Http\Livewire\Auth\Verify;
+use App\Http\Livewire\Auth\Register;
+use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
-use App\Http\Livewire\Auth\Register;
-use App\Http\Livewire\Auth\Verify;
-use App\Models\Membership;
-use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Auth\Passwords\Confirm;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Livewire\BuyMembership;
+use App\Http\Livewire\Home;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', Home::class)->name('home');
+
+Route::get('/buy/{id}', BuyMembership::class)->name('buyMembership');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
@@ -54,7 +58,4 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', LogoutController::class)
         ->name('logout');
-
-    // Route::post('logout', Membership::class)
-    //     ->name('buy_member');
 });

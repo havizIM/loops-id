@@ -18,6 +18,9 @@ class Register extends Component
     public $email = '';
 
     /** @var string */
+    public $phone = '';
+
+    /** @var string */
     public $gender = '';
 
     /** @var string */
@@ -32,6 +35,7 @@ class Register extends Component
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'gender' => ['required', 'in:Male,Female'],
+            'phone' => ['required'], 
             'password' => ['required', 'min:8', 'same:passwordConfirmation'],
         ]);
 
@@ -39,6 +43,7 @@ class Register extends Component
             'email' => $this->email,
             'name' => $this->name,
             'gender' => $this->gender,
+            'phone' => $this->phone,
             'password' => Hash::make($this->password),
         ]);
 

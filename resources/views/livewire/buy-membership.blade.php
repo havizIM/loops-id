@@ -1,34 +1,64 @@
-@section('title', 'Create a new account')
+@section('title', 'Buy - Membership Web App')
 
 <div>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <a href="{{ route('home') }}" class="flex justify-center">
-            <img src="{{ asset('logo.jpeg') }}" />
-        </a>
 
         <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900 leading-9">
-            Buat Akun Baru
+            Berlangganan {{ $membership->name }}
         </h2>
-
         <p class="mt-2 text-sm text-center text-gray-600 leading-5 max-w">
             atau
-            <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                Masuk Dengan Akunmu
+            <a href="{{ route('home') }}" class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                Kembali ke Home
             </a>
         </p>
     </div>
 
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-            <form wire:submit.prevent="register">
+    <form wire:submit.prevent="subscribe({{ $membership->id }})">
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <div class="font-medium">{{ $membership->name }}</div>
+                        <div class="text-sm">/ {{ $membership->duration_in_month }} Bulan</div>
+                    </div>
+                    <div>
+                        Rp. {{ number_format($membership->price) }}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mt-4 flex justify-between items-center font-semibold">
+                    <div>Total Bayar</div>
+                    <div>Rp. {{ number_format($membership->price) }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
+            <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
                 <div>
+                    <div class="font-semibold text-lg mb-1">Informasi Akun</div>
+                    @guest
+                    <div class="text-xs">Jika sudah punya akun? <a href="{{ route('login') }}"><u>Masuk</u></a> untuk lanjutkan.</div>
+                    @endguest
+                </div>
+
+                <div class="mt-6">
                     <label for="name" class="block text-sm font-medium text-gray-700 leading-5">
                         Nama
                     </label>
 
+                    @auth
+                    <div>
+                        {{ auth()->user()->name }}
+                    </div>
+                    @else
                     <div class="mt-1 rounded-md shadow-sm">
                         <input wire:model.lazy="name" id="name" type="text" autofocus class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red @enderror" />
                     </div>
+                    @endauth
 
                     @error('name')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -40,9 +70,16 @@
                         Alamat Email
                     </label>
 
+
+                    @auth
+                    <div>
+                        {{ auth()->user()->email }}
+                    </div>
+                    @else
                     <div class="mt-1 rounded-md shadow-sm">
                         <input wire:model.lazy="email" id="email" type="email" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('email') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red @enderror" />
                     </div>
+                    @endauth
 
                     @error('email')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -54,9 +91,15 @@
                         Telepon
                     </label>
 
+                    @auth
+                    <div>
+                        {{ auth()->user()->phone }}
+                    </div>
+                    @else
                     <div class="mt-1 rounded-md shadow-sm">
                         <input wire:model.lazy="phone" id="phone" type="number" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('email') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red @enderror" />
                     </div>
+                    @endauth
 
                     @error('phone')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -68,6 +111,11 @@
                         Jenis Kelamin
                     </label>
 
+                    @auth
+                    <div>
+                        {{ auth()->user()->gender }}
+                    </div>
+                    @else
                     <div class="mt-1 rounded-md shadow-sm">
                         <select wire:model.lazy="gender" id="gender" type="gender" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('email') border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red @enderror">
                             <option value=""></option>
@@ -75,12 +123,14 @@
                             <option value="Female">Female</option>
                         </select>
                     </div>
+                    @endauth
 
                     @error('gender')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
 
+                @guest
                 <div class="mt-6">
                     <label for="password" class="block text-sm font-medium text-gray-700 leading-5">
                         Kata Sandi
@@ -104,15 +154,12 @@
                         <input wire:model.lazy="passwordConfirmation" id="password_confirmation" type="password" class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 appearance-none rounded-md focus:outline-none focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                     </div>
                 </div>
-
-                <div class="mt-6">
-                    <span class="block w-full rounded-md shadow-sm">
-                        <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                            Daftar
-                        </button>
-                    </span>
-                </div>
-            </form>
+                @endguest
+            </div>
         </div>
-    </div>
+
+        <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
+            <button type="submit" class="w-full bg-[navy] p-4 text-white rounded-lg">Berlangganan</button>
+        </div>
+    </form>
 </div>
