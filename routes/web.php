@@ -26,7 +26,10 @@ use App\Http\Livewire\Home;
 
 Route::get('/', Home::class)->name('home');
 
-Route::get('/buy/{id}', BuyMembership::class)->name('buyMembership');
+Route::middleware('checkMember')->group(function() {
+    Route::get('/buy/{id}', BuyMembership::class)->name('buyMembership');
+});
+
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)

@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            MembershipSeeder::class
+            UserSeeder::class,
+            MembershipSeeder::class,
+            UserMembershipSeeder::class
         ]);
     }
 }

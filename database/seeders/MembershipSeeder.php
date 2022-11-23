@@ -17,19 +17,19 @@ class MembershipSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Paket Basic',
+                'name'              => 'Paket Basic',
                 'duration_in_month' => 1,
-                'price' => 50000
+                'price'             => 50000
             ],
             [
-                'name' => 'Paket Middle',
+                'name'              => 'Paket Middle',
                 'duration_in_month' => 3,
-                'price' => 130000
+                'price'             => 130000
             ],
             [
-                'name' => 'Paket Advance',
+                'name'              => 'Paket Advance',
                 'duration_in_month' => 6,
-                'price' => 250000
+                'price'             => 250000
             ]
         ];
 
