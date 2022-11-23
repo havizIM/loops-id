@@ -19,3 +19,4 @@
 ## Cara Running Aplikasi
 
 Jalankan aplikasi dengan command : npm run dev
+Copy link yang tersedia pada terminal di browser
