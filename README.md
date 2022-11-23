@@ -2,7 +2,7 @@
 
 - PHP > 8.0
 - Nodejs > 14
-- MySql 8.0
+- MySql > 5.7
 
 ## Cara Installasi
 
