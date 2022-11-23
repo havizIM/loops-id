@@ -1,6 +1,6 @@
 ## Requirement
 
-- PHP 8.1
+- PHP > 8.0
 - Nodejs > 14
 - MySql 8.0
 
