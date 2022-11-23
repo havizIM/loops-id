@@ -10,6 +10,7 @@ use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\TestEmailController;
 use App\Http\Livewire\BuyMembership;
 use App\Http\Livewire\Home;
 
@@ -25,6 +26,8 @@ use App\Http\Livewire\Home;
 */
 
 Route::get('/', Home::class)->name('home');
+
+Route::get('/test', [TestEmailController::class, 'index'])->name('test');
 
 Route::middleware('checkMember')->group(function() {
     Route::get('/buy/{id}', BuyMembership::class)->name('buyMembership');

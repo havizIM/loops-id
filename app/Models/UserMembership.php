@@ -22,4 +22,9 @@ class UserMembership extends Model
     protected $casts = [
         'membership_log' => 'json'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
